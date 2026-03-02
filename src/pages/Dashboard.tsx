@@ -20,6 +20,27 @@ interface ApiLog {
   message: string;
 }
 
+
+
+// Helper Function to download CSV-----
+const exportToCsv = (logs: ApiLog[], filename = "logs.csv") => {
+  if (!logs.length) return;
+
+  const headers = Object.keys(logs[0]);
+  const rows = logs.map((log) =>
+    headers.map((key) => `"${(log as any)[key]}"`).join(",")
+  );
+  const csvContent = [headers.join(","), ...rows].join("\n");
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  link.click();
+};
+
+
+
 let logs: ApiLog[] = logsData;
 
 function Dashboard() {
@@ -122,6 +143,17 @@ function Dashboard() {
 
       {/* Dark/Light Mode Toggle */}
       <Row className="mb-3 justify-content-end">
+        
+        <Col md="auto">
+            <Button
+            variant="primary"
+            onClick={() => exportToCsv(filteredLogs)}
+            className="mb-3"
+          >
+            Export Table to CSV
+          </Button>
+        </Col>
+
         <Col md="auto">
           <Button
             variant={darkMode ? "light" : "dark"}
