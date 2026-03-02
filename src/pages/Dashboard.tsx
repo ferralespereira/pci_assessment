@@ -1,4 +1,4 @@
-import { Container, Row, Col, Card, Table, Badge } from "react-bootstrap";
+import { Button, Container, Row, Col, Card, Table, Badge } from "react-bootstrap";
 import logsData from "../api_logs.json";
 
 // for the Pie and Bar charts
@@ -7,7 +7,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearSca
 ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 // for filtering
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 interface ApiLog {
@@ -23,6 +23,14 @@ interface ApiLog {
 let logs: ApiLog[] = logsData;
 
 function Dashboard() {
+  
+  // setting Dark/light mode-----------------------------------------------------------initialize-----
+  const [darkMode, setDarkMode] = useState(false);
+  useEffect(() => {
+    document.body.className = darkMode ? "bg-dark text-light" : "";
+  }, [darkMode]);
+  // setting Dark/light mode-----------------------------------------------------------end-----
+
   
   
   // When filtering logs-----------------------------------------------------------initialize-----
@@ -111,10 +119,24 @@ function Dashboard() {
 
   return (
     <Container className="mt-4">
+
+      {/* Dark/Light Mode Toggle */}
+      <Row className="mb-3 justify-content-end">
+        <Col md="auto">
+          <Button
+            variant={darkMode ? "light" : "dark"}
+            onClick={() => setDarkMode(!darkMode)}
+          >
+            {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          </Button>
+        </Col>
+      </Row>
+
+
       {/* KPI Cards */}
       <Row className="mb-4">        
         <Col md={3} className="mb-3">
-          <Card className="bg-dark text-white">
+          <Card className="bg-dark text-white border borer-light">
             <Card.Body>
               <Card.Title>Total Requests</Card.Title>
               <h3>{totalRequests}</h3>
@@ -175,7 +197,7 @@ function Dashboard() {
         </Col>
 
         {/* Render Bar Chart */}
-        <Col md={8}>
+        <Col md={8} className="mt-2 mt-md-0">
           <Card>
             <Card.Body>
               <Card.Title>Requests per Day</Card.Title>
