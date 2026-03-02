@@ -1,9 +1,11 @@
 import { Container, Row, Col, Card, Table, Badge } from "react-bootstrap";
 import logsData from "../api_logs.json";
 
-// for the chart
-import { Pie } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+// for the Pie and Bar charts
+import { Pie, Bar } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from "chart.js";
+ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend);
+
 
 interface ApiLog {
   id: number;
@@ -45,9 +47,7 @@ function Dashboard() {
 
 
 // Chart part-----------------------------------initialize----
-ChartJS.register(ArcElement, Tooltip, Legend);
 
-// Prepare Pie Chart Data
 const responseCodes = [200, 404, 422, 429];
 const pieData = {
   labels: responseCodes.map((code) => code.toString()),
@@ -64,6 +64,32 @@ const pieData = {
   ],
 };
 // Chart part-----------------------------------end----
+
+
+// Bar Chart part-----------------------------------initialize----
+
+// Group logs by day (YYYY-MM-DD)
+const requestsPerDay: Record<string, number> = {};
+
+logs.forEach((log) => {
+  const day = new Date(log.date).toISOString().split("T")[0]; // e.g., "2025-02-20"
+  requestsPerDay[day] = (requestsPerDay[day] || 0) + 1;
+});
+
+// Prepare data for the Bar chart
+const barData = {
+  labels: Object.keys(requestsPerDay), // days
+  datasets: [
+    {
+      label: "Requests per Day",
+      data: Object.values(requestsPerDay),
+      backgroundColor: "#007bff", // blue bars
+    },
+  ],
+};
+
+// Bar Chart part-----------------------------------end----
+
 
 
   return (
@@ -119,9 +145,10 @@ const pieData = {
         </Col>
       </Row>
 
-      {/* Render Pie Chart */}
-      <Row className="mb-4">
-        <Col md={6}>
+      {/* Render Pie and Bar Chart------------------ini---- */}
+      <Row className="my-4">
+       {/* Render Pie Chart */}
+        <Col md={4}>
           <Card>
             <Card.Body>
               <Card.Title>Requests by Response Code</Card.Title>
@@ -129,7 +156,19 @@ const pieData = {
             </Card.Body>
           </Card>
         </Col>
+
+        {/* Render Bar Chart */}
+        <Col md={8}>
+          <Card>
+            <Card.Body>
+              <Card.Title>Requests per Day</Card.Title>
+              <Bar data={barData} />
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
+      {/* Render Pie and Bar Chart------------------end---- */}
+
 
       {/* Table */}
       <Table striped bordered hover responsive>
