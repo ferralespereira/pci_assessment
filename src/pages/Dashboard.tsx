@@ -193,7 +193,22 @@ const barData = {
               </td>
               <td>
                 <Badge
-                  bg={log.response_code === 200 ? "success" : "danger"}
+                  bg={
+                    log.response_code === 200
+                      ? "success"
+                      : log.response_code === 404
+                      ? "warning"
+                      : log.response_code === 422
+                      ? "secondary"
+                      : log.response_code === 429
+                      ? "danger"
+                      : "secondary"
+                  }
+                  text={
+                    log.response_code === 404
+                      ? "black"
+                      : "white"
+                  }
                 >
                   {log.response_code}
                 </Badge>
