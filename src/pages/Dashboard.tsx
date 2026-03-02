@@ -63,49 +63,49 @@ function Dashboard() {
 
 
 
-// Chart part-----------------------------------initialize----
+  // Chart part-----------------------------------initialize----
 
-const responseCodes = [200, 404, 422, 429];
-const pieData = {
-  labels: responseCodes.map((code) => code.toString()),
-  datasets: [
-    {
-      label: "Requests by Response Code",
-      data: responseCodes.map(
-        (code) => logs.filter((l) => l.response_code === code).length
-      ),
-      backgroundColor: ["#28a745", "#dc3545", "#ffc107", "#17a2b8"], // green, red, yellow, blue
-      borderColor: "#fff",
-      borderWidth: 1,
-    },
-  ],
-};
-// Chart part-----------------------------------end----
+  const responseCodes = [200, 404, 422, 429];
+  const pieData = {
+    labels: responseCodes.map((code) => code.toString()),
+    datasets: [
+      {
+        label: "Requests by Response Code",
+        data: responseCodes.map(
+          (code) => logs.filter((l) => l.response_code === code).length
+        ),
+        backgroundColor: ["#28a745", "#dc3545", "#ffc107", "#17a2b8"], // green, red, yellow, blue
+        borderColor: "#fff",
+        borderWidth: 1,
+      },
+    ],
+  };
+  // Chart part-----------------------------------end----
 
 
-// Bar Chart part-----------------------------------initialize----
+  // Bar Chart part-----------------------------------initialize----
 
-// Group logs by day (YYYY-MM-DD)
-const requestsPerDay: Record<string, number> = {};
+  // Group logs by day (YYYY-MM-DD)
+  const requestsPerDay: Record<string, number> = {};
 
-logs.forEach((log) => {
-  const day = new Date(log.date).toISOString().split("T")[0]; // e.g., "2025-02-20"
-  requestsPerDay[day] = (requestsPerDay[day] || 0) + 1;
-});
+  logs.forEach((log) => {
+    const day = new Date(log.date).toISOString().split("T")[0]; // e.g., "2025-02-20"
+    requestsPerDay[day] = (requestsPerDay[day] || 0) + 1;
+  });
 
-// Prepare data for the Bar chart
-const barData = {
-  labels: Object.keys(requestsPerDay), // days
-  datasets: [
-    {
-      label: "Requests per Day",
-      data: Object.values(requestsPerDay),
-      backgroundColor: "#007bff", // blue bars
-    },
-  ],
-};
+  // Prepare data for the Bar chart
+  const barData = {
+    labels: Object.keys(requestsPerDay), // days
+    datasets: [
+      {
+        label: "Requests per Day",
+        data: Object.values(requestsPerDay),
+        backgroundColor: "#007bff", // blue bars
+      },
+    ],
+  };
 
-// Bar Chart part-----------------------------------end----
+  // Bar Chart part-----------------------------------end----
 
 
 
