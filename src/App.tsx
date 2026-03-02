@@ -1,5 +1,5 @@
-import React from 'react';
 import { Button, Alert, Navbar, Container, Nav } from 'react-bootstrap';
+import data from './api_logs.json'; 
 
 function App(): JSX.Element {
   return (
