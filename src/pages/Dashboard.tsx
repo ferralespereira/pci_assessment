@@ -1,6 +1,10 @@
 import { Container, Row, Col, Card, Table, Badge } from "react-bootstrap";
 import logsData from "../api_logs.json";
 
+// for the chart
+import { Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+
 interface ApiLog {
   id: number;
   date: string;
@@ -37,6 +41,30 @@ function Dashboard() {
   const mostActiveEndpoint = Object.entries(endpointCount).sort(
     (a, b) => b[1] - a[1]
   )[0]?.[0] || "N/A";
+
+
+
+// Chart part-----------------------------------initialize----
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+// Prepare Pie Chart Data
+const responseCodes = [200, 404, 422, 429];
+const pieData = {
+  labels: responseCodes.map((code) => code.toString()),
+  datasets: [
+    {
+      label: "Requests by Response Code",
+      data: responseCodes.map(
+        (code) => logs.filter((l) => l.response_code === code).length
+      ),
+      backgroundColor: ["#28a745", "#dc3545", "#ffc107", "#17a2b8"], // green, red, yellow, blue
+      borderColor: "#fff",
+      borderWidth: 1,
+    },
+  ],
+};
+// Chart part-----------------------------------end----
+
 
   return (
     <Container className="mt-4">
@@ -86,6 +114,18 @@ function Dashboard() {
             <Card.Body>
               <Card.Title>Most Active Endpoint</Card.Title>
               <h5>"{mostActiveEndpoint}"</h5>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+
+      {/* Render Pie Chart */}
+      <Row className="mb-4">
+        <Col md={6}>
+          <Card>
+            <Card.Body>
+              <Card.Title>Requests by Response Code</Card.Title>
+              <Pie data={pieData} />
             </Card.Body>
           </Card>
         </Col>

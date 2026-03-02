@@ -4,6 +4,8 @@
 `
 1-
 React-Bootstrap is a library of Bootstrap components rewritten specifically for React. It allows you to use Bootstrap’s styles and components as React components, rather than relying on HTML classes and jQuery.
+2-
+npm install chart.js react-chartjs-2
 `
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
