@@ -178,8 +178,9 @@ const barData = {
             <th>Date</th>
             <th>Endpoint</th>
             <th>Method</th>
-            <th>Status</th>
+            <th>Response codes</th>
             <th>Response Time</th>
+            <th>Message</th>
           </tr>
         </thead>
         <tbody>
@@ -191,7 +192,7 @@ const barData = {
               <td>
                 <Badge bg="primary">{log.method}</Badge>
               </td>
-              <td>
+              <td align="center">
                 <Badge
                   bg={
                     log.response_code === 200
@@ -214,6 +215,7 @@ const barData = {
                 </Badge>
               </td>
               <td>{log.response_time_ms} ms</td>
+              <td>{log.message}</td>
             </tr>
           ))}
         </tbody>
