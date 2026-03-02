@@ -42,7 +42,7 @@ function Dashboard() {
     <Container className="mt-4">
       {/* KPI Cards */}
       <Row className="mb-4">        
-        <Col md={3}>
+        <Col md={3} className="mb-3">
           <Card className="bg-dark text-white">
             <Card.Body>
               <Card.Title>Total Requests</Card.Title>
@@ -51,7 +51,7 @@ function Dashboard() {
           </Card>
         </Col>
 
-        <Col md={3}>
+        <Col md={3} className="mb-3">
           <Card className="bg-success text-white">
             <Card.Body>
               <Card.Title>Successful (200)</Card.Title>
@@ -60,7 +60,7 @@ function Dashboard() {
           </Card>
         </Col>
 
-        <Col md={3}>
+        <Col md={3} className="mb-3">
           <Card className="bg-danger text-white">
             <Card.Body>
               <Card.Title>Failed</Card.Title>
@@ -69,7 +69,7 @@ function Dashboard() {
           </Card>
         </Col>
 
-        <Col md={3}>
+        <Col md={3} className="mb-3">
           <Card className="bg-info text-black">
             <Card.Body>
               <Card.Title>Avg Response Time</Card.Title>
@@ -82,10 +82,10 @@ function Dashboard() {
       {/* Most Active Endpoint */}
       <Row>
         <Col md={6} className="mx-auto">
-          <Card className="mb-4 bg-secondary text-white p-3">
+          <Card className="mb-4 bg-secondary text-white text-center p-3">
             <Card.Body>
               <Card.Title>Most Active Endpoint</Card.Title>
-              <h5>{mostActiveEndpoint}</h5>
+              <h5>"{mostActiveEndpoint}"</h5>
             </Card.Body>
           </Card>
         </Col>
