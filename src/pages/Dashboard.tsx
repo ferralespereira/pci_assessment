@@ -6,6 +6,9 @@ import { Pie, Bar } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from "chart.js";
 ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
+// for filtering
+import { useState } from "react";
+
 
 interface ApiLog {
   id: number;
@@ -17,9 +20,23 @@ interface ApiLog {
   message: string;
 }
 
-const logs: ApiLog[] = logsData;
+let logs: ApiLog[] = logsData;
 
 function Dashboard() {
+  
+  
+  // When filtering logs-----------------------------------------------------------initialize-----
+  const [filterCode, setFilterCode] = useState<string>("all");
+
+  logs = logsData; // Reset logs to original data before applying filter
+  const filteredLogs =
+    filterCode === "all"
+      ? logs
+      : logs.filter((log) => log.response_code === parseInt(filterCode));
+  logs = filteredLogs; // Update the logs variable to reflect the filtered logs
+  // When filtering logs-----------------------------------------------------------end-----
+
+
   const totalRequests = logs.length;
 
   const successfulRequests = logs.filter(
@@ -178,7 +195,20 @@ const barData = {
             <th>Date</th>
             <th>Endpoint</th>
             <th>Method</th>
-            <th>Response codes</th>
+            <th>
+              Response codes
+              <select
+                className="form-select"
+                value={filterCode}
+                onChange={(e) => setFilterCode(e.target.value)}
+              >
+                <option value="all">All Response Codes</option>
+                <option value="200">200 - OK</option>
+                <option value="404">404 - Not Found</option>
+                <option value="422">422 - Unprocessable Entity</option>
+                <option value="429">429 - Too Many Requests</option>
+              </select>
+            </th>
             <th>Response Time</th>
             <th>Message</th>
           </tr>
