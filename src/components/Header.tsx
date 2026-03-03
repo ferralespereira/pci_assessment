@@ -1,9 +1,10 @@
+import { color } from "chart.js/helpers";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+    <Navbar variant="dark" expand="lg" style={{ backgroundColor: "rgb(41, 60, 87)", boxShadow: "-1px 2px 31.1px -2px #6a6b7d8c" }} collapseOnSelect>
       <Container>
         {/* Brand / Logo */}
         <Navbar.Brand as={Link} to="/">

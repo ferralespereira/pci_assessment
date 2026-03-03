@@ -17,7 +17,7 @@ export default function Layout({ children }: LayoutProps) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-dark text-white text-center p-3 mt-auto">
+      <footer className="text-white text-center p-3 mt-auto" style={{ backgroundColor: "rgb(32, 48, 70)", boxShadow: "-1px 2px 31.1px -2px #6a6b7d8c" }}>
         © 2026 My Company
       </footer>
     </div>
