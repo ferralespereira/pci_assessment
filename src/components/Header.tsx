@@ -1,6 +1,5 @@
-import { color } from "chart.js/helpers";
 import { useEffect, useState } from "react";
-import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Header() {

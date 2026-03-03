@@ -46,14 +46,6 @@ let logs: ApiLog[] = logsData;
 
 function Dashboard() {
   
-  // setting Dark/light mode-----------------------------------------------------------initialize-----
-  const [darkMode, setDarkMode] = useState(false);
-  useEffect(() => {
-    document.body.className = darkMode ? "bg-dark text-light" : "";
-  }, [darkMode]);
-  // setting Dark/light mode-----------------------------------------------------------end-----
-
-  
   
   // When filtering logs-----------------------------------------------------------initialize-----
   const [filterCode, setFilterCode] = useState<string>("all");
