@@ -1,5 +1,6 @@
 import { Button, Container, Row, Col, Card, Table, Badge } from "react-bootstrap";
 import logsData from "../api_logs.json";
+import Layout from "../components/Layout";
 
 // for the Pie and Bar charts
 import { Pie, Bar } from "react-chartjs-2";
@@ -183,221 +184,223 @@ function Dashboard() {
 
 
   return (
-    <Container className="mt-4">
+    <Layout>
+      <Container className="mt-4">
 
-      {/* Dark/Light Mode Toggle */}
-      <Row className="mb-3 justify-content-end">
-        
-        <Col md="auto">
+        {/* Dark/Light Mode Toggle */}
+        <Row className="mb-3 justify-content-end">
+          
+          <Col md="auto">
+              <Button
+              variant="primary"
+              onClick={() => exportToCsv(filteredLogs)}
+              className="mb-3"
+            >
+              Export Table to CSV <i className="bi bi-download"></i>
+            </Button>
+          </Col>
+
+          <Col md="auto">
             <Button
-            variant="primary"
-            onClick={() => exportToCsv(filteredLogs)}
-            className="mb-3"
-          >
-            Export Table to CSV <i className="bi bi-download"></i>
-          </Button>
-        </Col>
-
-        <Col md="auto">
-          <Button
-            variant={darkMode ? "light" : "dark"}
-            onClick={() => setDarkMode(!darkMode)}
-            className="rounded rounded-circle mb-3 fs-5"
-          >
-            {darkMode ? <i className="bi bi-brightness-high"></i> : <i className="bi bi-moon"></i>}
-          </Button>
-        </Col>
-      </Row>
+              variant={darkMode ? "light" : "dark"}
+              onClick={() => setDarkMode(!darkMode)}
+              className="rounded rounded-circle mb-3 fs-5"
+            >
+              {darkMode ? <i className="bi bi-brightness-high"></i> : <i className="bi bi-moon"></i>}
+            </Button>
+          </Col>
+        </Row>
 
 
-      {/* KPI Cards */}
-      <Row className="mb-4">        
-        <Col md={3} className="mb-3">
-          <Card className="bg-dark text-white border borer-light">
-            <Card.Body>
-              <Card.Title>Total Requests</Card.Title>
-              <h3>{totalRequests}</h3>
-            </Card.Body>
-          </Card>
-        </Col>
+        {/* KPI Cards */}
+        <Row className="mb-4">        
+          <Col md={3} className="mb-3">
+            <Card className="bg-dark text-white border borer-light">
+              <Card.Body>
+                <Card.Title>Total Requests</Card.Title>
+                <h3>{totalRequests}</h3>
+              </Card.Body>
+            </Card>
+          </Col>
 
-        <Col md={3} className="mb-3">
-          <Card className="bg-success text-white">
-            <Card.Body>
-              <Card.Title>Successful (200)</Card.Title>
-              <h3>{successfulRequests}</h3>
-            </Card.Body>
-          </Card>
-        </Col>
+          <Col md={3} className="mb-3">
+            <Card className="bg-success text-white">
+              <Card.Body>
+                <Card.Title>Successful (200)</Card.Title>
+                <h3>{successfulRequests}</h3>
+              </Card.Body>
+            </Card>
+          </Col>
 
-        <Col md={3} className="mb-3">
-          <Card className="bg-danger text-white">
-            <Card.Body>
-              <Card.Title>Failed</Card.Title>
-              <h3>{failedRequests}</h3>
-            </Card.Body>
-          </Card>
-        </Col>
+          <Col md={3} className="mb-3">
+            <Card className="bg-danger text-white">
+              <Card.Body>
+                <Card.Title>Failed</Card.Title>
+                <h3>{failedRequests}</h3>
+              </Card.Body>
+            </Card>
+          </Col>
 
-        <Col md={3} className="mb-3">
-          <Card className="bg-info text-black">
-            <Card.Body>
-              <Card.Title>Avg Response Time</Card.Title>
-              <h3>{averageResponseTime.toFixed(2)} ms</h3>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+          <Col md={3} className="mb-3">
+            <Card className="bg-info text-black">
+              <Card.Body>
+                <Card.Title>Avg Response Time</Card.Title>
+                <h3>{averageResponseTime.toFixed(2)} ms</h3>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
 
-      {/* Most Active Endpoint */}
-      <Row>
-        <Col md={6} className="mx-auto">
-          <Card className="mb-4 bg-secondary text-white text-center p-3">
-            <Card.Body>
-              <Card.Title>Most Active Endpoint</Card.Title>
-              <h5>"{mostActiveEndpoint}"</h5>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+        {/* Most Active Endpoint */}
+        <Row>
+          <Col md={6} className="mx-auto">
+            <Card className="mb-4 bg-secondary text-white text-center p-3">
+              <Card.Body>
+                <Card.Title>Most Active Endpoint</Card.Title>
+                <h5>"{mostActiveEndpoint}"</h5>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
 
-      {/* Render Pie and Bar Chart------------------ini---- */}
-      <Row className="my-4">
-       {/* Render Pie Chart */}
-        <Col md={4}>
-          <Card>
-            <Card.Body>
-              <Card.Title>Requests by Response Code</Card.Title>
-              <Pie data={pieData} />
-            </Card.Body>
-          </Card>
-        </Col>
+        {/* Render Pie and Bar Chart------------------ini---- */}
+        <Row className="my-4">
+        {/* Render Pie Chart */}
+          <Col md={4}>
+            <Card>
+              <Card.Body>
+                <Card.Title>Requests by Response Code</Card.Title>
+                <Pie data={pieData} />
+              </Card.Body>
+            </Card>
+          </Col>
 
-        {/* Render Bar Chart */}
-        <Col md={8} className="mt-2 mt-md-0">
-          <Card>
-            <Card.Body>
-              <Card.Title>Requests per Day</Card.Title>
-              <Bar data={barData} />
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      {/* Render Pie and Bar Chart------------------end---- */}
+          {/* Render Bar Chart */}
+          <Col md={8} className="mt-2 mt-md-0">
+            <Card>
+              <Card.Body>
+                <Card.Title>Requests per Day</Card.Title>
+                <Bar data={barData} />
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        {/* Render Pie and Bar Chart------------------end---- */}
 
 
-      {/* Table */}
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th onClick={() => handleSort("id")} style={{ cursor: "pointer", width: "50px" }}>
-              {sortField === "id" ?
-                  sortDirection === "asc" ? 
-                    <i className="bi bi-arrow-up">Id</i> 
-                  : 
-                    <i className="bi bi-arrow-down">Id</i>
-                : "Id"
-              }
-            </th>
-            <th onClick={() => handleSort("date")} style={{ cursor: "pointer" }}>
-              {sortField === "date" ?
-                  sortDirection === "asc" ? 
-                    <i className="bi bi-arrow-up">Date</i> 
-                  : 
-                    <i className="bi bi-arrow-down">Date</i>
-                : "Date"
-              }
-            </th>
-            <th onClick={() => handleSort("endpoint")} style={{ cursor: "pointer" }}>
-              {sortField === "endpoint" ?
-                  sortDirection === "asc" ? 
-                    <i className="bi bi-arrow-up">Endpoint</i> 
-                  : 
-                    <i className="bi bi-arrow-down">Endpoint</i>
-                : "Endpoint"
-              }
-            </th>
-            <th onClick={() => handleSort("method")} style={{ cursor: "pointer" }}>
-              {sortField === "method" ?
-                  sortDirection === "asc" ? 
-                    <i className="bi bi-arrow-up">Method</i> 
-                  : 
-                    <i className="bi bi-arrow-down">Method</i>
-                : "Method"
-              }
-            </th>
-            <th>
-              {/* Response codes */}
-              <select
-                className="form-select fw-bold"
-                value={filterCode}
-                onChange={(e) => setFilterCode(e.target.value)}
-              >
-                <option value="all">All Response Codes</option>
-                <option value="200">200 - OK</option>
-                <option value="404">404 - Not Found</option>
-                <option value="422">422 - Unprocessable Entity</option>
-                <option value="429">429 - Too Many Requests</option>
-              </select>
-            </th>
-            <th onClick={() => handleSort("response_time_ms")} style={{ cursor: "pointer" }}>
-              {sortField === "response_time_ms" ?
-                  sortDirection === "asc" ? 
-                    <i className="bi bi-arrow-up">Response Time</i> 
-                  : 
-                    <i className="bi bi-arrow-down">Response Time</i>
-                : "Response Time"
-              }
-            </th>
-            <th onClick={() => handleSort("message")} style={{ cursor: "pointer" }}>
-              {sortField === "message" ?
-                  sortDirection === "asc" ? 
-                    <i className="bi bi-arrow-up">Message</i> 
-                  : 
-                    <i className="bi bi-arrow-down">Message</i>
-                : "Message"
-              }
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedLogs.map((log) => (
-            <tr key={log.id}>
-              <td>{log.id}</td>
-              <td>{new Date(log.date).toLocaleString()}</td>
-              <td>{log.endpoint}</td>
-              <td>
-                <Badge bg="primary">{log.method}</Badge>
-              </td>
-              <td align="center">
-                <Badge
-                  bg={
-                    log.response_code === 200
-                      ? "success"
-                      : log.response_code === 404
-                      ? "warning"
-                      : log.response_code === 422
-                      ? "secondary"
-                      : log.response_code === 429
-                      ? "danger"
-                      : "secondary"
-                  }
-                  text={
-                    log.response_code === 404
-                      ? "black"
-                      : "white"
-                  }
+        {/* Table */}
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th onClick={() => handleSort("id")} style={{ cursor: "pointer", width: "50px" }}>
+                {sortField === "id" ?
+                    sortDirection === "asc" ? 
+                      <i className="bi bi-arrow-up">Id</i> 
+                    : 
+                      <i className="bi bi-arrow-down">Id</i>
+                  : "Id"
+                }
+              </th>
+              <th onClick={() => handleSort("date")} style={{ cursor: "pointer" }}>
+                {sortField === "date" ?
+                    sortDirection === "asc" ? 
+                      <i className="bi bi-arrow-up">Date</i> 
+                    : 
+                      <i className="bi bi-arrow-down">Date</i>
+                  : "Date"
+                }
+              </th>
+              <th onClick={() => handleSort("endpoint")} style={{ cursor: "pointer" }}>
+                {sortField === "endpoint" ?
+                    sortDirection === "asc" ? 
+                      <i className="bi bi-arrow-up">Endpoint</i> 
+                    : 
+                      <i className="bi bi-arrow-down">Endpoint</i>
+                  : "Endpoint"
+                }
+              </th>
+              <th onClick={() => handleSort("method")} style={{ cursor: "pointer" }}>
+                {sortField === "method" ?
+                    sortDirection === "asc" ? 
+                      <i className="bi bi-arrow-up">Method</i> 
+                    : 
+                      <i className="bi bi-arrow-down">Method</i>
+                  : "Method"
+                }
+              </th>
+              <th>
+                {/* Response codes */}
+                <select
+                  className="form-select fw-bold"
+                  value={filterCode}
+                  onChange={(e) => setFilterCode(e.target.value)}
                 >
-                  {log.response_code}
-                </Badge>
-              </td>
-              <td>{log.response_time_ms} ms</td>
-              <td>{log.message}</td>
+                  <option value="all">All Response Codes</option>
+                  <option value="200">200 - OK</option>
+                  <option value="404">404 - Not Found</option>
+                  <option value="422">422 - Unprocessable Entity</option>
+                  <option value="429">429 - Too Many Requests</option>
+                </select>
+              </th>
+              <th onClick={() => handleSort("response_time_ms")} style={{ cursor: "pointer" }}>
+                {sortField === "response_time_ms" ?
+                    sortDirection === "asc" ? 
+                      <i className="bi bi-arrow-up">Response Time</i> 
+                    : 
+                      <i className="bi bi-arrow-down">Response Time</i>
+                  : "Response Time"
+                }
+              </th>
+              <th onClick={() => handleSort("message")} style={{ cursor: "pointer" }}>
+                {sortField === "message" ?
+                    sortDirection === "asc" ? 
+                      <i className="bi bi-arrow-up">Message</i> 
+                    : 
+                      <i className="bi bi-arrow-down">Message</i>
+                  : "Message"
+                }
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Container>
+          </thead>
+          <tbody>
+            {sortedLogs.map((log) => (
+              <tr key={log.id}>
+                <td>{log.id}</td>
+                <td>{new Date(log.date).toLocaleString()}</td>
+                <td>{log.endpoint}</td>
+                <td>
+                  <Badge bg="primary">{log.method}</Badge>
+                </td>
+                <td align="center">
+                  <Badge
+                    bg={
+                      log.response_code === 200
+                        ? "success"
+                        : log.response_code === 404
+                        ? "warning"
+                        : log.response_code === 422
+                        ? "secondary"
+                        : log.response_code === 429
+                        ? "danger"
+                        : "secondary"
+                    }
+                    text={
+                      log.response_code === 404
+                        ? "black"
+                        : "white"
+                    }
+                  >
+                    {log.response_code}
+                  </Badge>
+                </td>
+                <td>{log.response_time_ms} ms</td>
+                <td>{log.message}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Container>
+    </Layout>
   );
 }
 
