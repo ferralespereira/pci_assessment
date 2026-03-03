@@ -8,6 +8,8 @@ React-Bootstrap is a library of Bootstrap components rewritten specifically for 
 npm install chart.js react-chartjs-2
 3-
  bootstrap-icons
+ 4-
+ react-router-dom
 `
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

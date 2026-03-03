@@ -10,6 +10,10 @@ export default function Layout({ children }: LayoutProps) {
       {/* Header */}
       <header className="bg-primary text-white p-3">
         <h1>My Dashboard</h1>
+        <nav>
+          <a href="/" className="text-white me-3">Dashboard</a>
+          <a href="/about" className="text-white">About Us</a>
+        </nav>
       </header>
 
       {/* Main content */}
