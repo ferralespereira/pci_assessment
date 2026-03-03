@@ -194,7 +194,7 @@ function Dashboard() {
             onClick={() => exportToCsv(filteredLogs)}
             className="mb-3"
           >
-            Export Table to CSV
+            Export Table to CSV <i className="bi bi-download"></i>
           </Button>
         </Col>
 
@@ -202,8 +202,9 @@ function Dashboard() {
           <Button
             variant={darkMode ? "light" : "dark"}
             onClick={() => setDarkMode(!darkMode)}
+            className="rounded rounded-circle mb-3 fs-5"
           >
-            {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            {darkMode ? <i className="bi bi-brightness-high"></i> : <i className="bi bi-moon"></i>}
           </Button>
         </Col>
       </Row>
