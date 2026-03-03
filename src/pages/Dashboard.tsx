@@ -65,6 +65,28 @@ function Dashboard() {
   logs = filteredLogs; // Update the logs variable to reflect the filtered logs
   // When filtering logs-----------------------------------------------------------end-----
 
+  // Sort by ID by default in ascending order------------------
+  /*
+    the default sorting is by "id" in ascending order, 
+    but when you click on a table header, 
+    it will change the sorting field and direction accordingly
+  */
+  const [sortField, setSortField] = useState<keyof ApiLog>("id");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+
+  // Handle sorting (function calling when clicking on table headers)------
+  const handleSort = (field: keyof ApiLog) => {
+    if (sortField === field) {
+      // if you are already sorting by this field, change the direction
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+    } else {
+      // if you are sorting by a different field, start sorting by this new field in ascending order
+      setSortField(field);
+      setSortDirection("asc");
+    }
+  };
+
+
 
   const totalRequests = logs.length;
 
@@ -135,6 +157,28 @@ function Dashboard() {
   };
 
   // Bar Chart part-----------------------------------end----
+
+
+  // before the render it is going to sort the logs based on the current sortField and sortDirection
+  const sortedLogs = [...filteredLogs].sort((a, b) => {
+    let valueA = a[sortField];
+    let valueB = b[sortField];
+
+    // Special case for date
+    if (sortField === "date") {
+      valueA = new Date(a.date).getTime();
+      valueB = new Date(b.date).getTime();
+    }
+
+    if (typeof valueA === "string") {
+      valueA = valueA.toLowerCase();
+      valueB = (valueB as string).toLowerCase();
+    }
+
+    if (valueA < valueB) return sortDirection === "asc" ? -1 : 1;
+    if (valueA > valueB) return sortDirection === "asc" ? 1 : -1;
+    return 0;
+  });
 
 
 
@@ -245,14 +289,14 @@ function Dashboard() {
       <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>Endpoint</th>
-            <th>Method</th>
+            <th onClick={() => handleSort("id")} style={{ cursor: "pointer" }}>ID</th>
+            <th onClick={() => handleSort("date")} style={{ cursor: "pointer" }}>Date</th>
+            <th onClick={() => handleSort("endpoint")} style={{ cursor: "pointer" }}>Endpoint</th>
+            <th onClick={() => handleSort("method")} style={{ cursor: "pointer" }}>Method</th>
             <th>
-              Response codes
+              {/* Response codes */}
               <select
-                className="form-select"
+                className="form-select fw-bold"
                 value={filterCode}
                 onChange={(e) => setFilterCode(e.target.value)}
               >
@@ -263,12 +307,12 @@ function Dashboard() {
                 <option value="429">429 - Too Many Requests</option>
               </select>
             </th>
-            <th>Response Time</th>
-            <th>Message</th>
+            <th onClick={() => handleSort("response_time_ms")} style={{ cursor: "pointer" }}>Response Time</th>
+            <th onClick={() => handleSort("message")} style={{ cursor: "pointer" }}>Message</th>
           </tr>
         </thead>
         <tbody>
-          {logs.map((log) => (
+          {sortedLogs.map((log) => (
             <tr key={log.id}>
               <td>{log.id}</td>
               <td>{new Date(log.date).toLocaleString()}</td>
