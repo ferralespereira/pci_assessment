@@ -24,7 +24,7 @@ export default function AboutUs() {
                 <tbody>
                   <tr>
                     <td>Technology Stack</td>
-                    <td>HTML5, CSS3, TypeScript/JavaScript, React, Bootstrap, chart.js, react-router-dom</td>
+                    <td>HTML5, CSS3, TypeScript/JavaScript, React, Vite, Bootstrap, chart.js, react-router-dom</td>
                   </tr>
                   <tr>
                     <td>Summary Cards (KPI Section)</td>
@@ -101,6 +101,10 @@ export default function AboutUs() {
                 <tr>
                   <td>React</td>
                   <td>Cleaner code, Reusability, Easier maintenance, Scalable structure</td>
+                </tr>
+                <tr>
+                  <td>Vite</td>
+                  <td>Faster development server, Optimized build process, Modern features support</td>
                 </tr>
                 <tr>
                   <td>TypeScript</td>

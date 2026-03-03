@@ -1,85 +1,39 @@
-# React + TypeScript + Bootstrap + Vite
+# React + TypeScript/JavaScript + Bootstrap + Vite
 
-# Author notes
-`
-1-
-React-Bootstrap is a library of Bootstrap components rewritten specifically for React. It allows you to use Bootstrap’s styles and components as React components, rather than relying on HTML classes and jQuery.
-2-
-npm install chart.js react-chartjs-2
-3-
- bootstrap-icons
- 4-
- react-router-dom
-`
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting Started (how to run the project)
 
-Currently, two official plugins are available:
+1. Clone the repository: `git clone https://github.com/ferralespereira/pci_assessment.git`
+2. Navigate to the project directory: `cd pci_assessment`
+3. Install dependencies: `npm install`
+4. Start the development server: `npm run dev`
+5. Open your browser and go to: `http://localhost:5173`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies/Libraries Used
 
-## React Compiler
+| Technologies/Libraries | Why |
+|---|---|
+| React | Cleaner code, Reusability, Easier maintenance, Scalable structure |
+| Vite  | Faster development server, Optimized build process, Modern features support |
+| TypeScript | Type safety, Improved developer experience, Easier refactoring |
+| Bootstrap | Responsive design, Pre-built components, Faster development |
+| chart.js and react-chartjs-2 | Powerful charting library, Easy integration with React, Customizable charts |
+| react-router-dom | Client-side routing, Seamless navigation, Better user experience |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+## Bonus Features Implemented
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Feature | Description |
+|---|---|
+| Dark/Light Mode | Toggle between light and dark color schemes |
+| Animations & Transitions | Smooth transitions, hover effects, loading states |
+| Export to CSV | Allow exporting the filtered table data as CSV |
+| Table Sorting | Sort the log table by clicking column headers |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Others
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Item | Details |
+|---|---|
+| Author | Javier Ferrales Pereira |
+| Hosting | https://pci.javierfolder.com |
