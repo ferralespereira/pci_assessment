@@ -348,7 +348,8 @@ function Dashboard() {
             {sortedLogs.map((log) => (
               <tr key={log.id}>
                 <td>{log.id}</td>
-                <td>{new Date(log.date).toLocaleString()}</td>
+                <td>{new Date(log.date).toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" })} — {new Date(log.date).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true })}</td>
+                {/* <td>{new Date(log.date).toLocaleString()}</td> */}
                 <td>{log.endpoint}</td>
                 <td>
                   <Badge bg="primary">{log.method}</Badge>
