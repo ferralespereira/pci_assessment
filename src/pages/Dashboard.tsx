@@ -8,7 +8,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearSca
 ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 // for filtering
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 
 interface ApiLog {
