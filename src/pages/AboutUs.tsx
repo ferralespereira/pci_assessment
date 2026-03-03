@@ -78,7 +78,8 @@ export default function AboutUs() {
 
 
             <div className="my-5 col-lg-10 mx-auto shadow p-4 rounded" style={{ backgroundColor: "rgb(41, 60, 87)", color: "white" }}>
-              <h4>Here are brief and clear instructions to run this "React + Vite + TypeScript" project:</h4>
+              <h4 className="fw-bold mb-3">React + TypeScript/JavaScript + Bootstrap + Vite</h4>
+              <h4>Here are brief and clear instructions to run this project:</h4>
               <ol>
                 <li>Clone the repository: <code className="text-warning">git clone https://github.com/ferralespereira/pci_assessment.git</code></li>
                 <li>Navigate to the project directory: <code className="text-warning">cd pci_assessment</code></li>
