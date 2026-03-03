@@ -290,10 +290,42 @@ function Dashboard() {
       <Table striped bordered hover responsive>
         <thead>
           <tr>
-            <th onClick={() => handleSort("id")} style={{ cursor: "pointer" }}>ID</th>
-            <th onClick={() => handleSort("date")} style={{ cursor: "pointer" }}>Date</th>
-            <th onClick={() => handleSort("endpoint")} style={{ cursor: "pointer" }}>Endpoint</th>
-            <th onClick={() => handleSort("method")} style={{ cursor: "pointer" }}>Method</th>
+            <th onClick={() => handleSort("id")} style={{ cursor: "pointer", width: "50px" }}>
+              {sortField === "id" ?
+                  sortDirection === "asc" ? 
+                    <i className="bi bi-arrow-up">Id</i> 
+                  : 
+                    <i className="bi bi-arrow-down">Id</i>
+                : "Id"
+              }
+            </th>
+            <th onClick={() => handleSort("date")} style={{ cursor: "pointer" }}>
+              {sortField === "date" ?
+                  sortDirection === "asc" ? 
+                    <i className="bi bi-arrow-up">Date</i> 
+                  : 
+                    <i className="bi bi-arrow-down">Date</i>
+                : "Date"
+              }
+            </th>
+            <th onClick={() => handleSort("endpoint")} style={{ cursor: "pointer" }}>
+              {sortField === "endpoint" ?
+                  sortDirection === "asc" ? 
+                    <i className="bi bi-arrow-up">Endpoint</i> 
+                  : 
+                    <i className="bi bi-arrow-down">Endpoint</i>
+                : "Endpoint"
+              }
+            </th>
+            <th onClick={() => handleSort("method")} style={{ cursor: "pointer" }}>
+              {sortField === "method" ?
+                  sortDirection === "asc" ? 
+                    <i className="bi bi-arrow-up">Method</i> 
+                  : 
+                    <i className="bi bi-arrow-down">Method</i>
+                : "Method"
+              }
+            </th>
             <th>
               {/* Response codes */}
               <select
@@ -308,8 +340,24 @@ function Dashboard() {
                 <option value="429">429 - Too Many Requests</option>
               </select>
             </th>
-            <th onClick={() => handleSort("response_time_ms")} style={{ cursor: "pointer" }}>Response Time</th>
-            <th onClick={() => handleSort("message")} style={{ cursor: "pointer" }}>Message</th>
+            <th onClick={() => handleSort("response_time_ms")} style={{ cursor: "pointer" }}>
+              {sortField === "response_time_ms" ?
+                  sortDirection === "asc" ? 
+                    <i className="bi bi-arrow-up">Response Time</i> 
+                  : 
+                    <i className="bi bi-arrow-down">Response Time</i>
+                : "Response Time"
+              }
+            </th>
+            <th onClick={() => handleSort("message")} style={{ cursor: "pointer" }}>
+              {sortField === "message" ?
+                  sortDirection === "asc" ? 
+                    <i className="bi bi-arrow-up">Message</i> 
+                  : 
+                    <i className="bi bi-arrow-down">Message</i>
+                : "Message"
+              }
+            </th>
           </tr>
         </thead>
         <tbody>
