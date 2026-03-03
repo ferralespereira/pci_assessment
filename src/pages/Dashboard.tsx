@@ -199,22 +199,12 @@ function Dashboard() {
               Export Table to CSV <i className="bi bi-download"></i>
             </Button>
           </Col>
-
-          <Col md="auto">
-            <Button
-              variant={darkMode ? "light" : "dark"}
-              onClick={() => setDarkMode(!darkMode)}
-              className="rounded rounded-circle mb-3 fs-5"
-            >
-              {darkMode ? <i className="bi bi-brightness-high"></i> : <i className="bi bi-moon"></i>}
-            </Button>
-          </Col>
         </Row>
 
 
         {/* KPI Cards */}
         <Row className="mb-4 justify-content-center">        
-          <Col md={3} className="mb-3 shadow p-2 border rounded">
+          <Col lg={3} className="mb-3 shadow p-2 border rounded">
             <Card className="bg-dark text-white border borer-light">
               <Card.Body>
                 <Card.Title>Total Requests</Card.Title>
@@ -223,7 +213,7 @@ function Dashboard() {
             </Card>
           </Col>
 
-          <Col md={2} className="mb-3 shadow p-2 border rounded mx-md-2">
+          <Col lg={2} className="mb-3 shadow p-2 border rounded mx-md-2">
             <Card className="bg-success text-white">
               <Card.Body>
                 <Card.Title>Successful (200)</Card.Title>
@@ -232,7 +222,7 @@ function Dashboard() {
             </Card>
           </Col>
 
-          <Col md={2} className="mb-3 shadow p-2 border rounded mx-md-2">
+          <Col lg={2} className="mb-3 shadow p-2 border rounded mx-md-2">
             <Card className="bg-danger text-white">
               <Card.Body>
                 <Card.Title>Failed</Card.Title>
@@ -241,7 +231,7 @@ function Dashboard() {
             </Card>
           </Col>
 
-          <Col md={3} className="mb-3 shadow p-2 border rounded">
+          <Col lg={3} className="mb-3 shadow p-2 border rounded">
             <Card className="bg-info text-black">
               <Card.Body>
                 <Card.Title>Avg Response Time</Card.Title>

@@ -1,8 +1,18 @@
 import { color } from "chart.js/helpers";
-import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function Header() {
+
+    // setting Dark/light mode-----------------------------------------------------------initialize-----
+    const [darkMode, setDarkMode] = useState(false);
+    useEffect(() => {
+      document.body.className = darkMode ? "bg-dark text-light" : "";
+    }, [darkMode]);
+    // setting Dark/light mode-----------------------------------------------------------end-----
+
+    
   return (
     <Navbar variant="dark" expand="lg" style={{ backgroundColor: "rgb(41, 60, 87)", boxShadow: "-1px 2px 31.1px -2px #6a6b7d8c" }} collapseOnSelect>
       <Container>
@@ -16,7 +26,7 @@ export default function Header() {
 
         {/* Links */}
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto align-items-center">
             <Nav.Link as={Link} to="/">
               Dashboard
             </Nav.Link>
@@ -24,11 +34,17 @@ export default function Header() {
               About Us
             </Nav.Link>
 
-            {/* Optional dropdown */}
-            <NavDropdown title="Settings" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
-            </NavDropdown>
+          
+            <Nav.Link>
+              <Button
+                variant={darkMode ? "light" : "dark"}
+                onClick={() => setDarkMode(!darkMode)}
+                className="rounded rounded-circle fs-5"
+              >
+                {darkMode ? <i className="bi bi-brightness-high"></i> : <i className="bi bi-moon"></i>}
+              </Button>
+            </Nav.Link>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
